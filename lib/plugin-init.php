@@ -98,6 +98,10 @@ class PluginInit
 
 			if (!empty($d_files)) {
 				foreach ($d_files as $file) {
+                    if($file === 'index.php') {
+                        continue;
+                    }
+
 					$file_extension = '.' . pathinfo($path . $file, PATHINFO_EXTENSION);
 
 					if ($file_extension == '.php') {

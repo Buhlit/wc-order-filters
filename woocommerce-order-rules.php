@@ -10,6 +10,7 @@ defined( 'ABSPATH' ) || exit;
  * Version: 1.0.0
  * Author: Buhl.dev
  * Author URI: https://buhl.dev
+ * WC tested up to: 7.5.1
  */
 
 if(!class_exists('BuhlLib\PluginInit')) {
