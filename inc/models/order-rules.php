@@ -4,10 +4,10 @@ defined( 'ABSPATH' ) || exit;
 
 use BuhlLib\Classes\Model\PluginModel;
 
-class Bookings extends PluginModel {
+class OrderRules extends PluginModel {
 
     protected static $version = '1.0.0';
-    protected static $tableName = 'bookings';
+    protected static $tableName = 'order_rules';
     protected static $primaryKey = 'id';
     protected static $columns = array(
         array(
@@ -16,18 +16,8 @@ class Bookings extends PluginModel {
             'default' => 'NOT NULL'
         ),
         array(
-            'name' => 'country',
-            'type' => 'varchar(50)',
-            'default' => 'NOT NULL'
-        ),
-        array(
-            'name' => 'private_key',
-            'type' => 'varchar(191)',
-            'default' => 'NOT NULL'
-        ),
-        array(
-            'name' => 'public_key',
-            'type' => 'varchar(191)',
+            'name' => 'settings',
+            'type' => 'LONGTEXT',
             'default' => 'NOT NULL'
         )
     );

@@ -7,9 +7,9 @@ use BuhlLib\Classes\Controllers\PluginController;
 use BuhlLib\Classes\PluginHook;
 use BuhlLib\Classes\Template\PluginListTable;
 use WoocommerceOrderRules\Inc\BuhlAdmin;
-use WoocommerceOrderRules\Inc\Models\Bookings;
+use WoocommerceOrderRules\Inc\Models\OrderRules;
 
-class DisplayBookings extends PluginController {
+class DisplayOrderRules extends PluginController {
 
     protected function addActions() {
         parent::addActions();
@@ -18,11 +18,11 @@ class DisplayBookings extends PluginController {
     }
 
     public function addAdminBookingPage() {
-        PluginAdminPage::addAdminPage('Boookings', 'bookings', 'activate_plugins', 'bookings', $this, 'test', 'dashicons-tickets-alt');
+        PluginAdminPage::addAdminPage('Order filter rules', 'Order filter rules', 'activate_plugins', 'order-rules', $this, 'getOrderRulesTableList', 'dashicons-editor-ol');
     }
 
-    public function test() {
-        $list = new PluginListTable('Alle Bookinger', 'bookings', Bookings::getAll(), array(
+    public function getOrderRulesTableList() {
+        $list = new PluginListTable('All Order Rules', 'order-rules', OrderRules::getAll(), array(
             'id' => array(
                 'column' => 'ID',
                 'default' => true,
@@ -31,11 +31,11 @@ class DisplayBookings extends PluginController {
             'name' => array(
                 'column' => 'Name'
             ),
-            'country' => array(
-                'column' => 'Country'
+            'settings' => array(
+                'column' => 'settings'
             ),
         ), array('id', 'name'));
 
-        BuhlAdmin::getTemplate('bookings', array('table' => $list));
+        BuhlAdmin::getTemplate('order-rules-list', array('table' => $list));
     }
 }
