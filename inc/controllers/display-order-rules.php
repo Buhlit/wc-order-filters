@@ -14,11 +14,12 @@ class DisplayOrderRules extends PluginController {
     protected function addActions() {
         parent::addActions();
 
-        PluginHook::addAction('admin_menu', $this, 'addAdminBookingPage');
+        PluginHook::addAction('admin_menu', $this, 'addAdminOrderRulesPages');
     }
 
-    public function addAdminBookingPage() {
-        PluginAdminPage::addAdminPage('Order filter rules', 'Order filter rules', 'activate_plugins', 'order-rules', $this, 'getOrderRulesTableList', 'dashicons-editor-ol');
+    public function addAdminOrderRulesPages() {
+        PluginAdminPage::addAdminPage(BuhlAdmin::translate('Order filter rules', false), BuhlAdmin::translate('Order rules', false), 'manage_woocommerce', 'order-rules', $this, 'getOrderRulesTableList', 'dashicons-editor-ol');
+        PluginAdminPage::addAdminSubPage('order-rules', BuhlAdmin::translate('Add new order filter rule', false), BuhlAdmin::translate('Add new', false), 'manage_woocommerce', 'add-order-rule', $this, 'addNewOrderRule');
     }
 
     public function getOrderRulesTableList() {
@@ -37,5 +38,9 @@ class DisplayOrderRules extends PluginController {
         ), array('id', 'name'));
 
         BuhlAdmin::getTemplate('order-rules-list', array('table' => $list));
+    }
+
+    public function addNewOrderRule() {
+        BuhlAdmin::getTemplate('add-new.display-new', ['title' => BuhlAdmin::translate('Add new order filter rule', false)]);
     }
 }

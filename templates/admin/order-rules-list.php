@@ -1,6 +1,9 @@
-<?php defined( 'ABSPATH' ) || exit; ?>
+<?php defined('ABSPATH') || exit; ?>
+<div class="wrap">
+    <h1 class="wp-heading-inline"><?php echo $table->getTitle(); ?></h1>
 
-<h2><?php echo $table->getTitle(); ?></h2>
-
-<?php
-$table->display();
+    <?php
+    $BuhlAdmin::getTemplate('actions.add-new-order-rule');
+    $table->display();
+    ?>
+</div>

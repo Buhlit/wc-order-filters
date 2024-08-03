@@ -13,6 +13,7 @@ class BuhlAdmin extends PluginAdmin {
         parent::addActions();
 
         PluginHook::addAction('admin_head', $this, 'createTables');
+        PluginHook::addAction('admin_enqueue_scripts', $this, 'addCustomCSS');
     }
 
     protected function addFilters() {
@@ -22,6 +23,11 @@ class BuhlAdmin extends PluginAdmin {
     public function createTables()
     {
         OrderRules::updateTable();
+    }
+
+    public function addCustomCSS()
+    {
+        BuhlAdmin::addStyle('main');
     }
 
 }

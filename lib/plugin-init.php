@@ -40,7 +40,8 @@ class PluginInit
 	public static function getPluginInfo($key)
 	{
 		if (empty(self::$pluginInfo)) {
-			self::$pluginInfo = get_plugin_data(static::getPluginRoot('index.php'));
+            // TODO::Make root file dynamic?
+			self::$pluginInfo = get_plugin_data(static::getPluginRoot('woocommerce-order-rules.php'));
 		}
 
 		return array_key_exists($key, self::$pluginInfo) ? self::$pluginInfo[$key] : false;
