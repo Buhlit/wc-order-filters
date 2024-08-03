@@ -3,13 +3,14 @@
 <div class="wrap woocommerce-order-rules-wrapper">
     <h1 class="wp-heading-inline"><?php esc_html_e($title); ?></h1>
 
-    <form action="" name="post" method="post" id="post">
-        <!-- TODO:: add nonce -->
+    <form action="<?php echo admin_url('admin-post.php') ?>" method="post" id="post">
+        <input type="hidden" name="action" value="add_new_order_rule">
+        <?php wp_nonce_field( 'add-new-order-rule_' . get_current_user_id(), 'woocommerce-order-rules'); ?>
         <div id="poststuff">
             <div id="titlediv">
                 <div id="titlewrap">
-                    <label id="title-prompt-text" for="title"><?php $BuhlAdmin::translate('Name'); ?></label>
-                    <input type="text" name="title" size="30" value="" id="title" spellcheck="true"
+                    <input type="text" name="name" size="30" value="" id="title" spellcheck="true" required
+                           placeholder="<?php $BuhlAdmin::translate('Name') ?>"
                            autocomplete="off">
                 </div>
             </div>
