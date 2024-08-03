@@ -44,6 +44,9 @@ class DisplayOrderRules extends PluginController {
     }
 
     public function addNewOrderRule() {
-        BuhlAdmin::getTemplate('add-new.display-new', ['title' => BuhlAdmin::translate('Add new order filter rule', false)]);
+        BuhlAdmin::getTemplate('add-new.display-new', [
+            'title' => BuhlAdmin::translate('Add new order filter rule', false),
+            'countries' => WC()->countries,
+        ]);
     }
 }

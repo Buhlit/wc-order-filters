@@ -25,8 +25,15 @@ class addOrderRule extends PluginController {
         }
 
         $name = sanitize_text_field($_POST['name']);
+        $raw_countries = $_POST['countries'];
+        $countries = [];
+        foreach($raw_countries AS $country) {
+            $countries[] = sanitize_text_field($country);
+        }
 
-        $rule = $this->addNewOrderRule($name);
+        $rule = $this->addNewOrderRule($name, [
+            'countries' => $countries,
+        ]);
 
         if(is_a($rule, 'WoocommerceOrderRules\Inc\Models\OrderRules')) {
             wp_safe_redirect( admin_url('admin.php?page=order-rules') );
@@ -38,12 +45,13 @@ class addOrderRule extends PluginController {
         exit();
     }
 
-    public function addNewOrderRule($name)
+    public function addNewOrderRule($name, $settings)
     {
 
         if(!empty($name)) {
             return OrderRules::insert([
                 'name' => $name,
+                'settings' => serialize($settings)
             ]);
         }
 

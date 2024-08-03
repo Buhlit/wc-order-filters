@@ -2,6 +2,28 @@
   input[type="submit"] {
     margin-top: 10px;
   }
+
+  legend {
+    font-weight: bold;
+    margin: 10px 0;
+  }
+
+  fieldset {
+    margin-top: 10px;
+
+    div {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    span {
+      margin: 10px;
+    }
+
+    label {
+      padding: 10px;
+    }
+  }
 }
 
 .woocommerce-order-rules-delete a {
