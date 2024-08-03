@@ -19,6 +19,8 @@ class PluginListTable extends \WP_List_Table
 	protected $orderby = 'asc';
 	protected $filterDataOutput = '';
 
+    protected $actions = [];
+
 	/**
 	 * PluginListTable constructor.
 	 * @param $title
@@ -124,6 +126,10 @@ class PluginListTable extends \WP_List_Table
 					$this->setOrderBy($column['orderby']);
 				}
 			}
+
+            if (array_key_exists('actions', $column) && $column['actions']) {
+                $this->actions[strtolower($column['column'])] = $column['actions'];
+            }
 		}
 
 		$this->columns = $_columns;
@@ -216,20 +222,25 @@ class PluginListTable extends \WP_List_Table
 	public function column_default($item, $column_name)
 	{
 		$value = apply_filters($this->getFilteDataOutput(), '', $item, $column_name);
+        $actions = [];
 
-		if (!is_int($value) && empty($value) || $value === 'empty') {
-			if (is_array($item) && array_key_exists($column_name, $item)) {
-				return $item[$column_name];
-			}
+        if(!empty($this->actions[$column_name])) {
+            $actions = $this->actions[$column_name];
 
-			if (is_object($item)) {
-				return $item->{$column_name};
-			}
-		} else if (is_int($value)) {
-			echo $value;
-		}
+            foreach($actions AS $action => $label) {
+                $actions[$action] = sprintf('<a href="%s?action=%s&id=%s&%s=%s">%s</a>', admin_url('admin.php'), $action, absint($item['id']), $action . '_nonce', wp_create_nonce($action . '_' .  absint($item['id'])), $label);
+            }
+        }
 
-		return false;
+        if(empty($value)) {
+            if (is_object($item)) {
+                $value = $item->{$column_name};
+            } elseif(is_array($item)) {
+                $value = $item[$column_name];
+            }
+        }
+
+        return sprintf('%1$s %2$s', $value, $this->row_actions($actions));
 	}
 
 	public function getOrderBy()

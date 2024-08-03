@@ -8,7 +8,8 @@ use WoocommerceOrderRules\Inc\Models\OrderRules;
 
 class addOrderRule extends PluginController {
 
-    protected function addActions() {
+    protected function addActions()
+    {
         parent::addActions();
 
         PluginHook::addAction('admin_post_add_new_order_rule', $this, 'validateAddingNewOrderRule');
@@ -18,7 +19,7 @@ class addOrderRule extends PluginController {
     {
 
         // Verify the nonce with the dynamic value
-        if (!wp_verify_nonce($_REQUEST['woocommerce-order-rules'], 'add-new-order-rule_' . get_current_user_id()) ||
+        if (!wp_verify_nonce($_POST['woocommerce-order-rules'], 'add-new-order-rule_' . get_current_user_id()) ||
             !current_user_can('manage_woocommerce')) {
             wp_die('Verification failed');
         }
@@ -33,7 +34,7 @@ class addOrderRule extends PluginController {
         }
 
         // TODO:: Error handling
-        wp_redirect( wp_get_referer() );
+        wp_safe_redirect( wp_get_referer() );
         exit();
     }
 

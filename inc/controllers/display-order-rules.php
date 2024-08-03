@@ -23,17 +23,20 @@ class DisplayOrderRules extends PluginController {
     }
 
     public function getOrderRulesTableList() {
-        $list = new PluginListTable('All Order Rules', 'order-rules', OrderRules::getAll(), array(
+        $list = new PluginListTable(BuhlAdmin::translate('All Order Rules', false), 'order-rules', OrderRules::getAll(), array(
             'id' => array(
                 'column' => 'ID',
                 'default' => true,
-                'orderby' => 'asc'
+                'orderby' => 'asc',
+                'actions' => [
+                    'woocommerce-order-rules-delete' => BuhlAdmin::translate('Delete', false)
+                ]
             ),
             'name' => array(
                 'column' => 'Name'
             ),
             'settings' => array(
-                'column' => 'settings'
+                'column' => 'Settings'
             ),
         ), array('id', 'name'));
 
