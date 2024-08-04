@@ -41,7 +41,7 @@ class PluginInit
 	{
 		if (empty(self::$pluginInfo)) {
             // TODO::Make root file dynamic?
-			self::$pluginInfo = get_plugin_data(static::getPluginRoot('woocommerce-order-rules.php'));
+			self::$pluginInfo = get_plugin_data(static::getPluginRoot('wc-order-filters.php'));
 		}
 
 		return array_key_exists($key, self::$pluginInfo) ? self::$pluginInfo[$key] : false;

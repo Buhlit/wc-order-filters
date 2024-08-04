@@ -1,11 +1,11 @@
-<?php namespace WoocommerceOrderRules\Inc\Controllers;
+<?php namespace WcOrderFilters\Inc\Controllers;
 
 defined( 'ABSPATH' ) || exit;
 
 use BuhlLib\Classes\Controllers\PluginController;
 use BuhlLib\Classes\PluginHook;
-use WoocommerceOrderRules\Inc\BuhlAdmin;
-use WoocommerceOrderRules\Inc\Models\OrderRules;
+use WcOrderFilters\Inc\BuhlAdmin;
+use WcOrderFilters\Inc\Models\OrderRules;
 
 class WcDisplayOrderRuleDropdown extends PluginController {
 

@@ -1,10 +1,10 @@
-<?php namespace WoocommerceOrderRules\Inc;
+<?php namespace WcOrderFilters\Inc;
 
 defined( 'ABSPATH' ) || exit;
 
 use BuhlLib\Classes\PluginAdmin;
 use BuhlLib\Classes\PluginHook;
-use WoocommerceOrderRules\Inc\Models\OrderRules;
+use WcOrderFilters\Inc\Models\OrderRules;
 
 class BuhlAdmin extends PluginAdmin {
 

@@ -1,10 +1,10 @@
-<?php namespace WoocommerceOrderRules\Inc\Controllers;
+<?php namespace WcOrderFilters\Inc\Controllers;
 
 defined('ABSPATH') || exit;
 
 use BuhlLib\Classes\Controllers\PluginController;
 use BuhlLib\Classes\PluginHook;
-use WoocommerceOrderRules\Inc\Models\OrderRules;
+use WcOrderFilters\Inc\Models\OrderRules;
 
 class addOrderRule extends PluginController
 {
@@ -66,7 +66,7 @@ class addOrderRule extends PluginController
             'countries' => $countries,
         ]);
 
-        if (is_a($rule, 'WoocommerceOrderRules\Inc\Models\OrderRules')) {
+        if (is_a($rule, 'WcOrderFilters\Inc\Models\OrderRules')) {
             wp_safe_redirect(admin_url('admin.php?page=order-rules'));
             exit();
         }

@@ -1,11 +1,11 @@
-<?php namespace WoocommerceOrderRules;
+<?php namespace WcOrderFilters;
 
 use BuhlLib\PluginInit;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Plugin Name: WooCommerce Order Rules
+ * Plugin Name: Order filters for WooCommerce
  * Description: Get an easy overview over all your orders by enhanced filters
  * Requires Plugins: woocommerce
  * Version: 1.0.0

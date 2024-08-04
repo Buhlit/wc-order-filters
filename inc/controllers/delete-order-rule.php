@@ -1,10 +1,10 @@
-<?php namespace WoocommerceOrderRules\Inc\Controllers;
+<?php namespace WcOrderFilters\Inc\Controllers;
 
 defined( 'ABSPATH' ) || exit;
 
 use BuhlLib\Classes\Controllers\PluginController;
 use BuhlLib\Classes\PluginHook;
-use WoocommerceOrderRules\Inc\Models\OrderRules;
+use WcOrderFilters\Inc\Models\OrderRules;
 
 class DeleteOrderRule extends PluginController {
 

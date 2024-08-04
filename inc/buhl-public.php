@@ -1,4 +1,4 @@
-<?php namespace WoocommerceOrderRules\Inc;
+<?php namespace WcOrderFilters\Inc;
 
 defined( 'ABSPATH' ) || exit;
 
