@@ -18,15 +18,12 @@ class DeleteOrderRule extends PluginController {
     public function deleteOrderRule()
     {
         $id = intval($_GET['id']);
-        $action = sanitize_text_field($_GET['action']);
 
         // Verify the nonce with the dynamic value
-        if (!wp_verify_nonce($_GET[$action . '_nonce'], $action . '_' . $id) ||
+        if (!isset($_GET['wpnonce']) || !wp_verify_nonce($_GET['wpnonce'], 'woocommerce-order-rules-delete_nonce') ||
             !current_user_can('manage_woocommerce')) {
             wp_die('Verification failed');
         }
-
-        $id = intval($_GET['id']);
 
         if(!empty($id)) {
             OrderRules::deleteByPrimaryKey($id);

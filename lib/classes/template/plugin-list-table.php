@@ -222,13 +222,19 @@ class PluginListTable extends \WP_List_Table
 	public function column_default($item, $column_name)
 	{
 		$value = apply_filters($this->getFilteDataOutput(), '', $item, $column_name);
-        $actions = [];
+        $_actions = [];
 
         if(!empty($this->actions[$column_name])) {
             $actions = $this->actions[$column_name];
 
-            foreach($actions AS $action => $label) {
-                $actions[$action] = sprintf('<a href="%s?action=%s&id=%s&%s=%s">%s</a>', admin_url('admin.php'), $action, absint($item['id']), $action . '_nonce', wp_create_nonce($action . '_' .  absint($item['id'])), $label);
+            foreach($actions AS $action) {
+                $replaces[] = $item[$action['specifier']];
+
+                if(!empty($action['nonce']) && !empty($action['nonce_action'])) {
+                    $replaces[] = wp_create_nonce($action['nonce_action']);
+                }
+
+                $_actions[$action['action_name']] = sprintf('<a href="%s">%s</a>', vsprintf($action['endpoint'], $replaces), $action['label']);
             }
         }
 
@@ -240,7 +246,7 @@ class PluginListTable extends \WP_List_Table
             }
         }
 
-        return sprintf('%1$s %2$s', $value, $this->row_actions($actions));
+        return sprintf('%1$s %2$s', $value, $this->row_actions($_actions));
 	}
 
 	public function getOrderBy()
