@@ -52,8 +52,11 @@ class PluginModel extends PluginTable
 		global $wpdb;
 
 		$table = $wpdb->prefix . self::getTableName();
-		$row = $wpdb->get_row("SELECT * FROM $table WHERE " . self::getPrimaryKey() . " = " . $id);
 
+		$row = $wpdb->get_row($wpdb->prepare(
+            "SELECT * FROM %i WHERE %i = %d",
+            [$table, self::getPrimaryKey(), $id]
+        ));
 
 		if (!$wpdb_object && $row !== null) {
 			$main_class = get_called_class();
