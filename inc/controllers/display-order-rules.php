@@ -55,7 +55,7 @@ class DisplayOrderRules extends PluginController {
 
     public function displayOrderRulesPage()
     {
-        if(!empty($_GET['id'])) {
+        if(!empty($_GET['id'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             $this->getEditOrderRule();
         } else {
             $this->getOrderRulesTableList();
@@ -64,7 +64,7 @@ class DisplayOrderRules extends PluginController {
 
     public function getEditOrderRule()
     {
-        $order_rule_id = intval($_GET['id']);
+        $order_rule_id = intval($_GET['id']); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
         $order_rule = OrderRules::getByPrimaryKey($order_rule_id);
 

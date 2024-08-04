@@ -265,12 +265,12 @@ class PluginListTable extends \WP_List_Table
 		$orderby = $this->getDefaultColumn();
 		$order = $this->getOrderBy();
 		// If orderby is set, use this as the sort column
-		if (!empty($_GET['orderby'])) {
-			$orderby = $_GET['orderby'];
+		if (!empty($_GET['orderby'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$orderby = wc_clean($_GET['orderby']); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 		// If order is set use this as the order
-		if (!empty($_GET['order'])) {
-			$order = $_GET['order'];
+		if (!empty($_GET['order'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$order = wc_clean($_GET['order']); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 		$result = strcmp($a[$orderby], $b[$orderby]);
 		if ($order === 'asc') {

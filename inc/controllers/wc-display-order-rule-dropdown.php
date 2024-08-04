@@ -24,8 +24,8 @@ class WcDisplayOrderRuleDropdown extends PluginController {
 
     public function applyOrderRule($query)
     {
-        if(!empty($_GET['order_rule'])) {
-            $order_rule_id = intval($_GET['order_rule']);
+        if(!empty($_GET['order_rule'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            $order_rule_id = intval($_GET['order_rule']); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
             if (!empty($order_rule_id)) {
                 $order_rule = OrderRules::getByPrimaryKey($order_rule_id);
@@ -49,8 +49,8 @@ class WcDisplayOrderRuleDropdown extends PluginController {
         if($order_type === 'shop_order' && $which === 'top') {
             $order_rules = OrderRules::getAll();
 
-            if(!empty($_GET['order_rule'])) {
-                $current_order_rule = wc_clean($_GET['order_rule']);
+            if(!empty($_GET['order_rule'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $current_order_rule = wc_clean($_GET['order_rule']); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             }
 
             if(!empty($order_rules)) {
