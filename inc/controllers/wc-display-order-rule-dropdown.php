@@ -19,6 +19,29 @@ class WcDisplayOrderRuleDropdown extends PluginController {
     {
         parent::addFilters();
 
+        PluginHook::addFilter('woocommerce_order_list_table_prepare_items_query_args', $this, 'applyOrderRule');
+    }
+
+    public function applyOrderRule($query)
+    {
+        if(!empty($_GET['order_rule'])) {
+            $order_rule_id = intval($_GET['order_rule']);
+
+            if (!empty($order_rule_id)) {
+                $order_rule = OrderRules::getByPrimaryKey($order_rule_id);
+
+                if (!empty($order_rule)) {
+                    $settings = unserialize($order_rule->settings);
+                    $countries = $settings['countries'];
+
+                    if (!empty($countries)) {
+                        $query['billing_country'] = $countries;
+                    }
+                }
+            }
+        }
+
+        return $query;
     }
 
     public function addOrderRuleDropdown($order_type, $which )
