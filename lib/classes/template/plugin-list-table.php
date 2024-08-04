@@ -83,7 +83,7 @@ class PluginListTable extends \WP_List_Table
 
 	public function setTableData($data = array())
 	{
-		$json = json_encode($data);
+		$json = wp_json_encode($data);
 		$this->tableData = json_decode($json, true);
 	}
 

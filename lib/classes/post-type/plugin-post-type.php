@@ -23,7 +23,8 @@ class PluginPostType extends PluginRegisterPostType
 
 	public static function getPostByPostTitle($title, $output = OBJECT)
 	{
-		return get_page_by_title($title, $output, self::$postType);
+		// TODO:: Fix deprecated function below - currently not using this file
+        //return get_page_by_title($title, $output, self::$postType);
 	}
 
 	public static function getPosts($numberposts = 5, $category = 0, $include = array(), $exclude = array(), $suppress_filters = true)
