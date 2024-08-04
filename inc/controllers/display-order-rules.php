@@ -49,8 +49,32 @@ class DisplayOrderRules extends PluginController {
     }
 
     public function addAdminOrderRulesPages() {
-        PluginAdminPage::addAdminPage(BuhlAdmin::translate('Order filter rules', false), BuhlAdmin::translate('Order rules', false), 'manage_woocommerce', 'order-rules', $this, 'getOrderRulesTableList', 'dashicons-editor-ol');
+        PluginAdminPage::addAdminPage(BuhlAdmin::translate('Order filter rules', false), BuhlAdmin::translate('Order rules', false), 'manage_woocommerce', 'order-rules', $this, 'displayOrderRulesPage', 'dashicons-editor-ol');
         PluginAdminPage::addAdminSubPage('order-rules', BuhlAdmin::translate('Add new order filter rule', false), BuhlAdmin::translate('Add new', false), 'manage_woocommerce', 'add-order-rule', $this, 'addNewOrderRule');
+    }
+
+    public function displayOrderRulesPage()
+    {
+        if(!empty($_GET['id'])) {
+            $this->getEditOrderRule();
+        } else {
+            $this->getOrderRulesTableList();
+        }
+    }
+
+    public function getEditOrderRule()
+    {
+        $order_rule_id = intval($_GET['id']);
+
+        $order_rule = OrderRules::getByPrimaryKey($order_rule_id);
+
+        if(!empty($order_rule)) {
+            $settings = unserialize($order_rule->settings);
+
+            BuhlAdmin::getTemplate('edit.display-order-rule-edit', array('order_rule' => $order_rule, 'settings' => $settings));
+        } else {
+            $this->getOrderRulesTableList();
+        }
     }
 
     public function getOrderRulesTableList() {
@@ -91,8 +115,7 @@ class DisplayOrderRules extends PluginController {
 
     public function addNewOrderRule() {
         BuhlAdmin::getTemplate('add-new.display-new', [
-            'title' => BuhlAdmin::translate('Add new order filter rule', false),
-            'countries' => WC()->countries,
+            'title' => BuhlAdmin::translate('Add new order filter rule', false)
         ]);
     }
 }

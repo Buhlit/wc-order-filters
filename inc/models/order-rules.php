@@ -26,4 +26,9 @@ class OrderRules extends PluginModel {
         return $this->name;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
 }
